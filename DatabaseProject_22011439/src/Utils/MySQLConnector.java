@@ -1,14 +1,15 @@
+package Utils;
 import java.io.*;
 import java.sql.*;
 
 public class MySQLConnector {
 	Connection con;
 	
-	public MySQLConnector() {
+	public boolean connectToDatabase(String userid, String pwd) {
+        boolean isValid = false;
+
 		String Driver = "";
 		String url = "jdbc:mysql://localhost:3306/db1";
-		String userid = "root";
-		String pwd = "1234";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -21,8 +22,11 @@ public class MySQLConnector {
 			System.out.println("Ready to connect DB...");
 			con = DriverManager.getConnection(url, userid, pwd);
 			System.out.println("Database connection success");
+			isValid = true;
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return isValid;
 	}
 }
