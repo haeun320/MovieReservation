@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.LoginModel;
+import View.AdminHomeView;
 import View.LoginView;
 import Model.MemberHomeModel;
 import View.MemberHomeView;
@@ -39,6 +40,10 @@ public class LoginController {
                 MemberHomeView homeView = new MemberHomeView();
                 MemberHomeController homeController = new MemberHomeController(homeView, memberModel);
                 homeView.setVisible(true);
+        	}
+        	else if (view.getUserType().equals("admin")) {
+        		AdminHomeView homeView = new AdminHomeView();
+        		homeView.setVisible(true);
         	}
             view.dispose(); // Close the login view
         } else {
