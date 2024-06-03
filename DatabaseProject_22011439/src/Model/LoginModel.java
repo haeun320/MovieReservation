@@ -52,4 +52,9 @@ public class LoginModel {
         
         return isValid;
     }
+    
+    public Connection getConnection() {
+    	con = db.getConnection();
+    	return con;
+    }
 }

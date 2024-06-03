@@ -3,6 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import Utils.MemberMenuBar;
 
 public class MemberHomeView extends JFrame {
 
@@ -11,10 +12,7 @@ public class MemberHomeView extends JFrame {
     private JTextField actorNameField;
     private JTextField genreField;
     private JButton searchButton;
-    private JMenuBar menuBar;
-    private JMenu movieReservationMenu;
-    private JMenu reservationHistoryMenu;
-    private JMenu logoutMenu;
+	private MemberMenuBar menuBar;
 
     public MemberHomeView() {
         // Set up the frame
@@ -24,14 +22,9 @@ public class MemberHomeView extends JFrame {
         setLocationRelativeTo(null);
         
         // Create menu bar
-        menuBar = new JMenuBar();
-        movieReservationMenu = new JMenu("영화예매");
-        menuBar.add(movieReservationMenu);
-        reservationHistoryMenu = new JMenu("예매내역");
-        menuBar.add(reservationHistoryMenu);
-        logoutMenu = new JMenu("로그아웃");
-        menuBar.add(logoutMenu);
+        menuBar = new MemberMenuBar(this);
         setJMenuBar(menuBar);
+
 
         // Create components
         movieNameField = new JTextField(40);
@@ -127,11 +120,5 @@ public class MemberHomeView extends JFrame {
 
     public void addSearchListener(java.awt.event.ActionListener listener) {
         searchButton.addActionListener(listener);
-    }
-    
-    public void addMenuMouseListener(MouseListener listener) {
-        movieReservationMenu.addMouseListener(listener);
-        reservationHistoryMenu.addMouseListener(listener);
-        logoutMenu.addMouseListener(listener);
     }
 }

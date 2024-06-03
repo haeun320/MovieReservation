@@ -29,4 +29,21 @@ public class MySQLConnector {
 		
 		return isValid;
 	}
+	
+	public boolean disconnectToDatabase() {
+		boolean isValid = false;
+		try {
+            if (con != null && !con.isClosed()) {
+                con.close();
+                isValid = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return isValid;
+	}
+	
+	public Connection getConnection() {
+        return con;
+    }
 }

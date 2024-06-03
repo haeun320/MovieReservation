@@ -39,7 +39,7 @@ public class LoginView extends JFrame {
         gc.gridwidth = 3;
         gc.insets = new Insets(10, 10, 10, 10);
         JLabel titleLabel = new JLabel("MOVIE RESERVATION", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Times", Font.BOLD, 20));
         panel.add(titleLabel, gc);
 
         // Radio buttons

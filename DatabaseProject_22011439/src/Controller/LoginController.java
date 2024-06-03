@@ -2,6 +2,7 @@ package Controller;
 
 import Model.LoginModel;
 import View.LoginView;
+import Model.MemberHomeModel;
 import View.MemberHomeView;
 
 import java.awt.event.ActionEvent;
@@ -34,7 +35,9 @@ public class LoginController {
         if (model.validateUser()) {
             // Navigate to the homepage
         	if (view.getUserType().equals("member")) {
+        		MemberHomeModel memberModel = new MemberHomeModel(model.getConnection());
                 MemberHomeView homeView = new MemberHomeView();
+                MemberHomeController homeController = new MemberHomeController(homeView, memberModel);
                 homeView.setVisible(true);
         	}
             view.dispose(); // Close the login view
