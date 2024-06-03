@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AdminHomeModel;
 import Model.LoginModel;
 import View.AdminHomeView;
 import View.LoginView;
@@ -43,6 +44,8 @@ public class LoginController {
         	}
         	else if (view.getUserType().equals("admin")) {
         		AdminHomeView homeView = new AdminHomeView();
+        		AdminHomeModel homeModel = new AdminHomeModel(model.getConnection());
+        		AdminHomeController homeController = new AdminHomeController(homeView, homeModel);
         		homeView.setVisible(true);
         	}
             view.dispose(); // Close the login view

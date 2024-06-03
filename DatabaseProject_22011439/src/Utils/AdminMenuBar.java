@@ -22,7 +22,7 @@ public class AdminMenuBar extends JMenuBar {
 		initializeMenu.addMouseListener(new MouseAdapter(){
 			 @Override
 	            public void mouseClicked(MouseEvent e) {
-	                System.out.println("Initialize clicked");
+	                System.out.println("Initialize menu clicked");
 	            }
 		});
 		add(initializeMenu);
@@ -37,7 +37,7 @@ public class AdminMenuBar extends JMenuBar {
 		insertDataMenuItem.addActionListener(new ActionListener() {
 			 @Override
 	            public void actionPerformed(ActionEvent e) {
-	                System.out.println("View table clicked");
+	                System.out.println("Insert data menu item clicked");
 	            }
 		});
 		
