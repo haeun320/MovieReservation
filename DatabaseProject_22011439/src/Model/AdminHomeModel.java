@@ -12,8 +12,16 @@ public class AdminHomeModel {
 	}
 	
 	public boolean initializeDatabase() {
+		System.out.println("Init Database...");
+		
 		if (!deleteTables()) return false;
+		System.out.println("Delete tables success");
+		
 		if (!createTables()) return false;
+		System.out.println("Create tables success");
+		
+		if (!insertSampleData()) return false;
+		System.out.println("insert sample data successs");
 		return true;
 	}
 	
@@ -71,4 +79,34 @@ public class AdminHomeModel {
         return isValid;
     }
 	
+	public boolean insertSampleData() {
+		boolean isValid = true;
+		
+		String[] insertSampleDataQueries = {
+            SQLQuery.INSERT_SAMPLE_DATA_MOVIE,
+            SQLQuery.INSERT_SAMPLE_DATA_ACTOR,
+            SQLQuery.INSERT_SAMPLE_DATA_GENRE,
+            SQLQuery.INSERT_SAMPLE_DATA_THEATER,
+            SQLQuery.INSERT_SAMPLE_DATA_SCREENING_SCHEDULE,
+            SQLQuery.INSERT_SAMPLE_DATA_SEAT,
+            SQLQuery.INSERT_SAMPLE_DATA_MEMBER,
+            SQLQuery.INSERT_SAMPLE_DATA_RESERVATION,
+            SQLQuery.INSERT_SAMPLE_DATA_TICKET
+        };
+        
+        try {
+            Statement stmt = con.createStatement();
+            
+            for (String query : insertSampleDataQueries) {
+                stmt.executeUpdate(query);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("SQL Exception occurred:");
+            e.printStackTrace(System.err);
+            isValid = false;
+        }
+        
+		return isValid;
+	}
 }
