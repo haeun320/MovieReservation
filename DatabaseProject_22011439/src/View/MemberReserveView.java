@@ -8,6 +8,7 @@ import Model.MemberReserveModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,8 @@ public class MemberReserveView extends JFrame {
     private DefaultListModel<String> timeListModel;
     private JButton selectSeatButton;
     private Map<String, List<Map<String, String>>> schedules;
+    private List<String> selectedSchedule;
+
 
     public MemberReserveView() {
         // Set up the frame
@@ -129,7 +132,11 @@ public class MemberReserveView extends JFrame {
 
         timeList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
+                String selectedTime = timeList.getSelectedValue();
                 if (timeList.getSelectedValue() != null) {
+                	String selectedTheater = theaterList.getSelectedValue();
+                    String selectedDate = dateList.getSelectedValue();
+                    getSelectedSchedule(selectedTheater, selectedDate, selectedTime);
                     selectSeatButton.setEnabled(true);
                 } else {
                     selectSeatButton.setEnabled(false);
@@ -182,12 +189,21 @@ public class MemberReserveView extends JFrame {
             }
         }
     }
+    
+    private void getSelectedSchedule(String theater, String date, String time) {
+    	selectedSchedule = new ArrayList<>();
+        selectedSchedule.add(theater);
+        selectedSchedule.add(date);
+        selectedSchedule.add(time);
+    }
+    
+    public List<String> getSelectedSchedule() {
+    	return selectedSchedule;
+    }
 
     public void addSelectSeatListener(ActionListener listener) {
         selectSeatButton.addActionListener(listener);
     }
-    
-
     
     public static void main(String[] args) {
 		MemberReserveView view = new MemberReserveView();

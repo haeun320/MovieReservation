@@ -66,10 +66,11 @@ public class SQLQuery {
 
     public static final String CREATE_SEAT_TABLE = 
         "CREATE TABLE Seat (" +
-        "seat_id int not null, " +
+        "seat_id int AUTO_INCREMENT not null, " +
+        "seat_num int not null, " +
         "theater_id int not null, " +
         "is_in_use boolean, " +
-        "primary key(seat_id, theater_id), " +
+        "primary key(seat_id), " +
         "foreign key(theater_id) references Theater(theater_id)" +
         ");";
 
@@ -106,7 +107,7 @@ public class SQLQuery {
         "sale_price int, " +
         "primary key(ticket_id), " +
         "foreign key(screening_schedule_id) references ScreeningSchedule(screening_schedule_id), " +
-        "foreign key(seat_id, theater_id) references Seat(seat_id, theater_id), " +
+        "foreign key(seat_id) references Seat(seat_id), " +
         "foreign key(reservation_id) references Reservation(reservation_id)" +
         ");";
 	//---------------------------------------------------
@@ -146,10 +147,11 @@ public class SQLQuery {
     public static final String INSERT_SAMPLE_DATA_GENRE =
         "INSERT INTO Genre (genre_name, movie_id, movie_name) VALUES" +
         "('Action', 1, 'Movie A')," +
+        "('Comedy', 1, 'Movie A')," +
         "('Comedy', 2, 'Movie B')," +
         "('Drama', 3, 'Movie C')," +
         "('Horror', 4, 'Movie D')," +
-        "('Sci-Fi', 5, 'Movie E')," +
+        "('Action', 5, 'Movie E')," +
         "('Romance', 6, 'Movie F')," +
         "('Adventure', 7, 'Movie G')," +
         "('Thriller', 8, 'Movie H')," +
@@ -160,9 +162,9 @@ public class SQLQuery {
 
     public static final String INSERT_SAMPLE_DATA_THEATER =
         "INSERT INTO Theater (theater_name, horizontal_seats, vertical_seats, is_in_use, number_of_seats) VALUES" +
-        "('강변', 10, 5, true, 50)," +
-        "('건대입구', 15, 10, true, 150)," +
-        "('구로', 20, 15, true, 300)," +
+        "('강변', 3, 5, true, 15)," +
+        "('건대입구', 3, 3, true, 9)," +
+        "('구로', 2, 3, true, 6)," +
         "('동대문', 25, 20, true, 500)," +
         "('명동', 10, 10, true, 100)," +
         "('미아', 15, 5, true, 75)," +
@@ -179,33 +181,51 @@ public class SQLQuery {
         "(1, 2, '2024-06-02', 'Sun', 2, '12:00:00')," +
         "(1, 3, '2024-06-03', 'Mon', 3, '14:00:00')," +
         "(1, 3, '2024-06-03', 'Mon', 4, '19:00:00')," +
-        "(2, 4, '2024-06-04', 'Tue', 1, '16:00:00')," +
-        "(3, 5, '2024-06-05', 'Wed', 1, '18:00:00')," +
-        "(4, 6, '2024-06-03', 'Mon', 1, '14:00:00')," +
-        "(5, 8, '2024-06-08', 'Sat', 1, '17:00:00')," +
-        "(6, 6, '2024-06-06', 'Thu', 1, '20:00:00')," +
-        "(7, 7, '2024-06-07', 'Fri', 1, '22:00:00')," +
-        "(7, 7, '2024-06-03', 'Mon', 2, '13:00:00')," +
-        "(8, 8, '2024-06-08', 'Sat', 1, '11:00:00')," +
-        "(9, 9, '2024-06-09', 'Sun', 1, '13:00:00')," +
-        "(10, 10, '2024-06-10', 'Mon', 1, '15:00:00')," +
-        "(11, 11, '2024-06-11', 'Tue', 1, '17:00:00')," +
-        "(12, 12, '2024-06-12', 'Wed', 1, '19:00:00');";
+        "(2, 2, '2024-06-04', 'Tue', 1, '16:00:00')," +
+        "(3, 1, '2024-06-05', 'Wed', 1, '18:00:00')," +
+        "(4, 3, '2024-06-03', 'Mon', 1, '14:00:00')," +
+        "(5, 2, '2024-06-08', 'Sat', 1, '17:00:00')," +
+        "(6, 1, '2024-06-06', 'Thu', 1, '20:00:00')," +
+        "(7, 3, '2024-06-07', 'Fri', 1, '22:00:00')," +
+        "(7, 2, '2024-06-03', 'Mon', 2, '13:00:00')," +
+        "(8, 1, '2024-06-08', 'Sat', 1, '11:00:00')," +
+        "(9, 1, '2024-06-09', 'Sun', 1, '13:00:00')," +
+        "(10, 2, '2024-06-10', 'Mon', 1, '15:00:00')," +
+        "(11, 3, '2024-06-11', 'Tue', 1, '17:00:00')," +
+        "(12, 1, '2024-06-12', 'Wed', 1, '19:00:00');";
 
     public static final String INSERT_SAMPLE_DATA_SEAT =
-        "INSERT INTO Seat (seat_id, theater_id, is_in_use) VALUES" +
+        "INSERT INTO Seat (seat_num, theater_id, is_in_use) VALUES" +
         "(1, 1, true)," +
+        "(2, 1, false)," +
+        "(3, 1, true)," +
+        "(4, 1, true)," +
+        "(5, 1, true)," +
+        "(6, 1, false)," +
+        "(7, 1, true)," +
+        "(8, 1, true)," +
+        "(9, 1, true)," +
+        "(10, 1, true)," +
+        "(11, 1, true)," +
+        "(12, 1, true)," +
+        "(13, 1, true)," +
+        "(14, 1, true)," +
+        "(15, 1, true)," +
+        "(1, 2, true)," +
         "(2, 2, true)," +
+        "(3, 2, false)," +
+        "(4, 2, true)," +
+        "(5, 2, false)," +
+        "(6, 2, true)," +
+        "(7, 2, false)," +
+        "(8, 2, true)," +
+        "(9, 2, true)," +
+        "(1, 3, true)," +
+        "(2, 3, true)," +
         "(3, 3, true)," +
-        "(4, 4, true)," +
-        "(5, 5, true)," +
-        "(6, 6, true)," +
-        "(7, 7, true)," +
-        "(8, 8, true)," +
-        "(9, 9, true)," +
-        "(10, 10, true)," +
-        "(11, 11, true)," +
-        "(12, 12, true);";
+        "(4, 3, false)," +
+        "(5, 3, true)," +
+        "(6, 3, false);";
 
     public static final String INSERT_SAMPLE_DATA_MEMBER =
         "INSERT INTO Member (member_id, member_name, phone_num, email) VALUES" +
@@ -224,33 +244,33 @@ public class SQLQuery {
 
     public static final String INSERT_SAMPLE_DATA_RESERVATION =
         "INSERT INTO Reservation (payment_method, payment_status, payment_amount, member_id, payment_date) VALUES" +
-        "('Credit Card', true, 100, 'user1', '2024-01-01')," +
-        "('Debit Card', true, 200, 'user1', '2024-01-02')," +
-        "('Cash', false, 150, 'user1', '2024-01-03')," +
-        "('Credit Card', true, 120, 'user1', '2024-01-04')," +
-        "('Debit Card', true, 180, 'user1', '2024-01-05')," +
-        "('Cash', false, 130, 'user1', '2024-01-06')," +
-        "('Credit Card', true, 160, 'user1', '2024-01-07')," +
-        "('Debit Card', true, 170, 'member8', '2024-01-08')," +
-        "('Cash', false, 140, 'member9', '2024-01-09')," +
-        "('Credit Card', true, 190, 'member10', '2024-01-10')," +
-        "('Debit Card', true, 110, 'member11', '2024-01-11')," +
-        "('Cash', false, 120, 'user1', '2024-01-12');";
+        "('신용카드', true, 10000, 'user1', '2024-01-01')," +
+        "('휴대폰결제', true, 20000, 'user1', '2024-01-02')," +
+        "('무통장입금', false, 15000, 'user1', '2024-01-03')," +
+        "('신용카드', true, 12000, 'user1', '2024-01-04')," +
+        "('휴대폰결제', true, 18000, 'user1', '2024-01-05')," +
+        "('무통장입금', false, 13000, 'member6', '2024-01-06')," +
+        "('신용카드', true, 16000, 'member7', '2024-01-07')," +
+        "('휴대폰결제', true, 17000, 'member8', '2024-01-08')," +
+        "('무통장입금', false, 14000, 'member9', '2024-01-09')," +
+        "('신용카드', true, 14000, 'member10', '2024-01-10')," +
+        "('휴대폰결제', true, 11000, 'member11', '2024-01-11')," +
+        "('무통장입금', false, 12000, 'user1', '2024-01-12');";
 
     public static final String INSERT_SAMPLE_DATA_TICKET =
         "INSERT INTO Ticket (screening_schedule_id, theater_id, seat_id, reservation_id, is_ticketed, standard_price, sale_price) VALUES" +
-        "(1, 1, 1, 1, true, 15, 10)," +
-        "(2, 2, 2, 2, true, 20, 15)," +
-        "(3, 3, 3, 3, false, 10, 8)," +
-        "(4, 4, 4, 4, true, 12, 9)," +
-        "(5, 5, 5, 5, true, 18, 14)," +
-        "(6, 6, 6, 6, false, 11, 7)," +
-        "(7, 7, 7, 7, true, 16, 13)," +
-        "(8, 8, 8, 8, true, 17, 12)," +
-        "(9, 9, 9, 9, false, 13, 10)," +
-        "(10, 10, 10, 10, true, 19, 15)," +
-        "(11, 11, 11, 11, true, 14, 11)," +
-        "(12, 12, 12, 12, false, 15, 12);";
+        "(1, 1, 2, 1, true, 15000, 10000)," +
+        "(1, 1, 6, 2, true, 20000, 20000)," +
+        "(2, 2, 20, 3, false, 15000, 15000)," +
+        "(5, 2, 18, 4, true, 13000, 12000)," +
+        "(7, 3, 28, 5, true, 18000, 14000)," +
+        "(6, 6, 6, 6, false, 11000, 7000)," +
+        "(7, 7, 7, 7, true, 16000, 13000)," +
+        "(8, 8, 8, 8, true, 17000, 12000)," +
+        "(9, 9, 9, 9, false, 13000, 10000)," +
+        "(10, 10, 10, 10, true, 19000, 15000)," +
+        "(11, 11, 11, 11, true, 14000, 11000)," +
+        "(12, 12, 12, 12, false, 15000, 12000);";
 	//---------------------------------------------------
 
     

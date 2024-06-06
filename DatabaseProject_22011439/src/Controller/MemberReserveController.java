@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.MemberReserveModel;
-import View.MemberReserveView;
+import Model.*;
+import View.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -40,7 +40,14 @@ public class MemberReserveController {
     }
 
     private void handleSelectSeat() {
-        // 좌석 선택 로직 구현
-        System.out.println("좌석 선택 버튼 클릭됨");
+    	// TODO: 좌석 선택 뷰 전환 구현 
+    	int scheduleId = model.getSelectedScheduleID(view.getSelectedSchedule());
+    	List<Integer> seat = model.getSeatInfo(scheduleId);
+    	
+        MemberSeatModel seatModel = new MemberSeatModel(model.getConnection());
+        MemberSeatView seatView = new MemberSeatView(seat.get(0), seat.get(1));
+        MemberSeatController seatController = new MemberSeatController(seatView, seatModel, scheduleId);
+        seatView.setVisible(true);
+        view.dispose();
     }
 }
