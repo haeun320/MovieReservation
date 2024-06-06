@@ -42,6 +42,7 @@ public class SQLQuery {
     public static final String CREATE_THEATER_TABLE = 
         "CREATE TABLE Theater (" +
         "theater_id int AUTO_INCREMENT not null, " +
+        "theater_name VARCHAR(30), " +
         "number_of_seats INT, " +
         "horizontal_seats INT, " +
         "vertical_seats INT, " +
@@ -114,18 +115,18 @@ public class SQLQuery {
 	//------------------ INSERT -------------------------
     public static final String INSERT_SAMPLE_DATA_MOVIE =
         "INSERT INTO Movie (movie_name, running_time, film_rates, director_name, movie_info, release_date, grade, screening_count) VALUES" +
-        "('Movie A', 120, '전체관람가', 'Director A', 'Info A', '2024-01-01', 8.5, 1)," +
-        "('Movie B', 150, '12세 이상 관람가', 'Director B', 'Info B', '2024-01-02', 7.8, 2)," +
-        "('Movie C', 100, '15세 이상 관람가', 'Director C', 'Info C', '2024-01-03', 9.2, 3)," +
-        "('Movie D', 90, '청소년 관람 불가', 'Director D', 'Info D', '2024-01-04', 6.5, 4)," +
+        "('Movie A', 120, '전체관람가', 'Director A', 'Info A', '2024-01-01', 8.5, 4)," +
+        "('Movie B', 150, '12세 이상 관람가', 'Director B', 'Info B', '2024-01-02', 7.8, 1)," +
+        "('Movie C', 100, '15세 이상 관람가', 'Director C', 'Info C', '2024-01-03', 9.2, 1)," +
+        "('Movie D', 90, '청소년 관람 불가', 'Director D', 'Info D', '2024-01-04', 6.5, 1)," +
         "('Movie E', 110, '전체관람가', 'Director E', 'Info E', '2024-01-05', 7.0, 1)," +
         "('Movie F', 130, '12세 이상 관람가', 'Director F', 'Info F', '2024-01-06', 8.0, 2)," +
-        "('Movie G', 140, '15세 이상 관람가', 'Director G', 'Info G', '2024-01-07', 9.0, 3)," +
-        "('Movie H', 105, '청소년 관람 불가', 'Director H', 'Info H', '2024-01-08', 6.8, 4)," +
+        "('Movie G', 140, '15세 이상 관람가', 'Director G', 'Info G', '2024-01-07', 9.0, 1)," +
+        "('Movie H', 105, '청소년 관람 불가', 'Director H', 'Info H', '2024-01-08', 6.8, 1)," +
         "('Movie I', 115, '전체관람가', 'Director I', 'Info I', '2024-01-09', 7.5, 1)," +
-        "('Movie J', 125, '12세 이상 관람가', 'Director J', 'Info J', '2024-01-10', 8.3, 2)," +
-        "('Movie K', 135, '15세 이상 관람가', 'Director K', 'Info K', '2024-01-11', 9.1, 3)," +
-        "('Movie L', 95, '청소년 관람 불가', 'Director L', 'Info L', '2024-01-12', 6.9, 4);";
+        "('Movie J', 125, '12세 이상 관람가', 'Director J', 'Info J', '2024-01-10', 8.3, 1)," +
+        "('Movie K', 135, '15세 이상 관람가', 'Director K', 'Info K', '2024-01-11', 9.1, 1)," +
+        "('Movie L', 95, '청소년 관람 불가', 'Director L', 'Info L', '2024-01-12', 6.9, 1);";
 
     public static final String INSERT_SAMPLE_DATA_ACTOR =
         "INSERT INTO Actor (actor_name, movie_id, movie_name) VALUES" +
@@ -158,34 +159,38 @@ public class SQLQuery {
         "('Documentary', 12, 'Movie L');";
 
     public static final String INSERT_SAMPLE_DATA_THEATER =
-        "INSERT INTO Theater (horizontal_seats, vertical_seats, is_in_use, number_of_seats) VALUES" +
-        "(10, 5, true, 50)," +
-        "(15, 10, true, 150)," +
-        "(20, 15, true, 300)," +
-        "(25, 20, true, 500)," +
-        "(10, 10, true, 100)," +
-        "(15, 5, true, 75)," +
-        "(20, 10, true, 200)," +
-        "(25, 15, true, 375)," +
-        "(10, 15, true, 150)," +
-        "(15, 20, true, 300)," +
-        "(20, 5, true, 100)," +
-        "(25, 10, true, 250);";
+        "INSERT INTO Theater (theater_name, horizontal_seats, vertical_seats, is_in_use, number_of_seats) VALUES" +
+        "('강변', 10, 5, true, 50)," +
+        "('건대입구', 15, 10, true, 150)," +
+        "('구로', 20, 15, true, 300)," +
+        "('동대문', 25, 20, true, 500)," +
+        "('명동', 10, 10, true, 100)," +
+        "('미아', 15, 5, true, 75)," +
+        "('불광', 20, 10, true, 200)," +
+        "('송파', 25, 15, true, 375)," +
+        "('신촌', 10, 15, true, 150)," +
+        "('압구정', 15, 20, true, 300)," +
+        "('왕십리', 20, 5, true, 100)," +
+        "('천호', 25, 10, true, 250);";
 
     public static final String INSERT_SAMPLE_DATA_SCREENING_SCHEDULE =
         "INSERT INTO ScreeningSchedule (movie_id, theater_id, screening_start_date, screening_day, screening_round, screening_start_time) VALUES" +
         "(1, 1, '2024-06-01', 'Sat', 1, '10:00:00')," +
-        "(2, 2, '2024-06-02', 'Sun', 2, '12:00:00')," +
-        "(3, 3, '2024-06-03', 'Mon', 3, '14:00:00')," +
-        "(4, 4, '2024-06-04', 'Tue', 4, '16:00:00')," +
-        "(5, 5, '2024-06-05', 'Wed', 1, '18:00:00')," +
-        "(6, 6, '2024-06-06', 'Thu', 2, '20:00:00')," +
-        "(7, 7, '2024-06-07', 'Fri', 3, '22:00:00')," +
-        "(8, 8, '2024-06-08', 'Sat', 4, '11:00:00')," +
+        "(1, 2, '2024-06-02', 'Sun', 2, '12:00:00')," +
+        "(1, 3, '2024-06-03', 'Mon', 3, '14:00:00')," +
+        "(1, 3, '2024-06-03', 'Mon', 4, '19:00:00')," +
+        "(2, 4, '2024-06-04', 'Tue', 1, '16:00:00')," +
+        "(3, 5, '2024-06-05', 'Wed', 1, '18:00:00')," +
+        "(4, 6, '2024-06-03', 'Mon', 1, '14:00:00')," +
+        "(5, 8, '2024-06-08', 'Sat', 1, '17:00:00')," +
+        "(6, 6, '2024-06-06', 'Thu', 1, '20:00:00')," +
+        "(7, 7, '2024-06-07', 'Fri', 1, '22:00:00')," +
+        "(7, 7, '2024-06-03', 'Mon', 2, '13:00:00')," +
+        "(8, 8, '2024-06-08', 'Sat', 1, '11:00:00')," +
         "(9, 9, '2024-06-09', 'Sun', 1, '13:00:00')," +
-        "(10, 10, '2024-06-10', 'Mon', 2, '15:00:00')," +
-        "(11, 11, '2024-06-11', 'Tue', 3, '17:00:00')," +
-        "(12, 12, '2024-06-12', 'Wed', 4, '19:00:00');";
+        "(10, 10, '2024-06-10', 'Mon', 1, '15:00:00')," +
+        "(11, 11, '2024-06-11', 'Tue', 1, '17:00:00')," +
+        "(12, 12, '2024-06-12', 'Wed', 1, '19:00:00');";
 
     public static final String INSERT_SAMPLE_DATA_SEAT =
         "INSERT INTO Seat (seat_id, theater_id, is_in_use) VALUES" +
