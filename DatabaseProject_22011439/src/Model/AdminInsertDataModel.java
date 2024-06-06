@@ -50,6 +50,12 @@ public class AdminInsertDataModel {
         } catch (SQLException e) {
             con.rollback(); 
             throw e;
+        } finally {
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
