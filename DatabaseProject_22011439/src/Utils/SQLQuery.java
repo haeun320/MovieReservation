@@ -246,16 +246,16 @@ public class SQLQuery {
         "INSERT INTO Reservation (payment_method, payment_status, payment_amount, member_id, payment_date) VALUES" +
         "('신용카드', true, 10000, 'user1', '2024-01-01')," +
         "('휴대폰결제', true, 20000, 'user1', '2024-01-02')," +
-        "('무통장입금', false, 15000, 'user1', '2024-01-03')," +
+        "('무통장입금', false, 15000, 'user1', NULL)," +
         "('신용카드', true, 12000, 'user1', '2024-01-04')," +
         "('휴대폰결제', true, 18000, 'user1', '2024-01-05')," +
-        "('무통장입금', false, 13000, 'member6', '2024-01-06')," +
+        "('무통장입금', false, 13000, 'member6', NULL)," +
         "('신용카드', true, 16000, 'member7', '2024-01-07')," +
         "('휴대폰결제', true, 17000, 'member8', '2024-01-08')," +
-        "('무통장입금', false, 14000, 'member9', '2024-01-09')," +
+        "('무통장입금', false, 14000, 'member9', NULL)," +
         "('신용카드', true, 14000, 'member10', '2024-01-10')," +
         "('휴대폰결제', true, 11000, 'member11', '2024-01-11')," +
-        "('무통장입금', false, 12000, 'user1', '2024-01-12');";
+        "('무통장입금', false, 12000, 'user1', NULL);";
 
     public static final String INSERT_SAMPLE_DATA_TICKET =
         "INSERT INTO Ticket (screening_schedule_id, theater_id, seat_id, reservation_id, is_ticketed, standard_price, sale_price) VALUES" +

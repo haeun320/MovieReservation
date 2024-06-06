@@ -40,11 +40,10 @@ public class MemberReserveController {
     }
 
     private void handleSelectSeat() {
-    	// TODO: 좌석 선택 뷰 전환 구현 
     	int scheduleId = model.getSelectedScheduleID(view.getSelectedSchedule());
     	List<Integer> seat = model.getSeatInfo(scheduleId);
     	
-        MemberSeatModel seatModel = new MemberSeatModel(model.getConnection());
+        MemberSeatModel seatModel = new MemberSeatModel(model.getConnection(), scheduleId);
         MemberSeatView seatView = new MemberSeatView(seat.get(0), seat.get(1));
         MemberSeatController seatController = new MemberSeatController(seatView, seatModel, scheduleId);
         seatView.setVisible(true);

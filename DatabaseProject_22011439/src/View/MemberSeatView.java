@@ -1,6 +1,9 @@
 package View;
 
 import javax.swing.*;
+
+import Utils.MemberMenuBar;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MemberSeatView extends JFrame {
+    private MemberMenuBar menuBar;
     private JPanel seatPanel;
     private JButton[][] seatButtons;
     private JButton proceedButton;
@@ -20,7 +24,11 @@ public class MemberSeatView extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
+        
+        // Create menu bar
+        menuBar = new MemberMenuBar(this);
+        setJMenuBar(menuBar);
+        
         seatPanel = new JPanel(new GridLayout(verticalSeats, horizontalSeats));
         seatButtons = new JButton[verticalSeats][horizontalSeats];
 
