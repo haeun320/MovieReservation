@@ -31,10 +31,11 @@ public class SQLQuery {
 
     public static final String CREATE_GENRE_TABLE = 
         "CREATE TABLE Genre (" +
-        "genre_name varchar(30) not null, " +
+        "genre_id int AUTO_INCREMENT not null, " +
+        "genre_name varchar(30), " +
         "movie_id int, " +
         "movie_name varchar(30), " +
-        "primary key(genre_name), " +
+        "primary key(genre_id), " +
         "foreign key(movie_id) references Movie(movie_id)" +
         ");";
 
@@ -113,18 +114,18 @@ public class SQLQuery {
 	//------------------ INSERT -------------------------
     public static final String INSERT_SAMPLE_DATA_MOVIE =
         "INSERT INTO Movie (movie_name, running_time, film_rates, director_name, movie_info, release_date, grade, screening_count) VALUES" +
-        "('Movie A', 120, '전체관람가', 'Director A', 'Info A', '2023-01-01', 8.5, 1)," +
-        "('Movie B', 150, '12세 이상 관람가', 'Director B', 'Info B', '2023-01-02', 7.8, 2)," +
-        "('Movie C', 100, '15세 이상 관람가', 'Director C', 'Info C', '2023-01-03', 9.2, 3)," +
-        "('Movie D', 90, '청소년 관람 불가', 'Director D', 'Info D', '2023-01-04', 6.5, 4)," +
-        "('Movie E', 110, '전체관람가', 'Director E', 'Info E', '2023-01-05', 7.0, 1)," +
-        "('Movie F', 130, '12세 이상 관람가', 'Director F', 'Info F', '2023-01-06', 8.0, 2)," +
-        "('Movie G', 140, '15세 이상 관람가', 'Director G', 'Info G', '2023-01-07', 9.0, 3)," +
-        "('Movie H', 105, '청소년 관람 불가', 'Director H', 'Info H', '2023-01-08', 6.8, 4)," +
-        "('Movie I', 115, '전체관람가', 'Director I', 'Info I', '2023-01-09', 7.5, 1)," +
-        "('Movie J', 125, '12세 이상 관람가', 'Director J', 'Info J', '2023-01-10', 8.3, 2)," +
-        "('Movie K', 135, '15세 이상 관람가', 'Director K', 'Info K', '2023-01-11', 9.1, 3)," +
-        "('Movie L', 95, '청소년 관람 불가', 'Director L', 'Info L', '2023-01-12', 6.9, 4);";
+        "('Movie A', 120, '전체관람가', 'Director A', 'Info A', '2024-01-01', 8.5, 1)," +
+        "('Movie B', 150, '12세 이상 관람가', 'Director B', 'Info B', '2024-01-02', 7.8, 2)," +
+        "('Movie C', 100, '15세 이상 관람가', 'Director C', 'Info C', '2024-01-03', 9.2, 3)," +
+        "('Movie D', 90, '청소년 관람 불가', 'Director D', 'Info D', '2024-01-04', 6.5, 4)," +
+        "('Movie E', 110, '전체관람가', 'Director E', 'Info E', '2024-01-05', 7.0, 1)," +
+        "('Movie F', 130, '12세 이상 관람가', 'Director F', 'Info F', '2024-01-06', 8.0, 2)," +
+        "('Movie G', 140, '15세 이상 관람가', 'Director G', 'Info G', '2024-01-07', 9.0, 3)," +
+        "('Movie H', 105, '청소년 관람 불가', 'Director H', 'Info H', '2024-01-08', 6.8, 4)," +
+        "('Movie I', 115, '전체관람가', 'Director I', 'Info I', '2024-01-09', 7.5, 1)," +
+        "('Movie J', 125, '12세 이상 관람가', 'Director J', 'Info J', '2024-01-10', 8.3, 2)," +
+        "('Movie K', 135, '15세 이상 관람가', 'Director K', 'Info K', '2024-01-11', 9.1, 3)," +
+        "('Movie L', 95, '청소년 관람 불가', 'Director L', 'Info L', '2024-01-12', 6.9, 4);";
 
     public static final String INSERT_SAMPLE_DATA_ACTOR =
         "INSERT INTO Actor (actor_name, movie_id, movie_name) VALUES" +
@@ -173,18 +174,18 @@ public class SQLQuery {
 
     public static final String INSERT_SAMPLE_DATA_SCREENING_SCHEDULE =
         "INSERT INTO ScreeningSchedule (movie_id, theater_id, screening_start_date, screening_day, screening_round, screening_start_time) VALUES" +
-        "(1, 1, '2023-06-01', 'Mon', 1, '10:00:00')," +
-        "(2, 2, '2023-06-02', 'Tue', 2, '12:00:00')," +
-        "(3, 3, '2023-06-03', 'Wed', 3, '14:00:00')," +
-        "(4, 4, '2023-06-04', 'Thu', 4, '16:00:00')," +
-        "(5, 5, '2023-06-05', 'Fri', 1, '18:00:00')," +
-        "(6, 6, '2023-06-06', 'Sat', 2, '20:00:00')," +
-        "(7, 7, '2023-06-07', 'Sun', 3, '22:00:00')," +
-        "(8, 8, '2023-06-08', 'Mon', 4, '11:00:00')," +
-        "(9, 9, '2023-06-09', 'Tue', 1, '13:00:00')," +
-        "(10, 10, '2023-06-10', 'Wed', 2, '15:00:00')," +
-        "(11, 11, '2023-06-11', 'Thu', 3, '17:00:00')," +
-        "(12, 12, '2023-06-12', 'Fri', 4, '19:00:00');";
+        "(1, 1, '2024-06-01', 'Sat', 1, '10:00:00')," +
+        "(2, 2, '2024-06-02', 'Sun', 2, '12:00:00')," +
+        "(3, 3, '2024-06-03', 'Mon', 3, '14:00:00')," +
+        "(4, 4, '2024-06-04', 'Tue', 4, '16:00:00')," +
+        "(5, 5, '2024-06-05', 'Wed', 1, '18:00:00')," +
+        "(6, 6, '2024-06-06', 'Thu', 2, '20:00:00')," +
+        "(7, 7, '2024-06-07', 'Fri', 3, '22:00:00')," +
+        "(8, 8, '2024-06-08', 'Sat', 4, '11:00:00')," +
+        "(9, 9, '2024-06-09', 'Sun', 1, '13:00:00')," +
+        "(10, 10, '2024-06-10', 'Mon', 2, '15:00:00')," +
+        "(11, 11, '2024-06-11', 'Tue', 3, '17:00:00')," +
+        "(12, 12, '2024-06-12', 'Wed', 4, '19:00:00');";
 
     public static final String INSERT_SAMPLE_DATA_SEAT =
         "INSERT INTO Seat (seat_id, theater_id, is_in_use) VALUES" +
@@ -214,22 +215,22 @@ public class SQLQuery {
         "('member9', 'Member I', 1234567898, 'member9@example.com')," +
         "('member10', 'Member J', 1234567899, 'member10@example.com')," +
         "('member11', 'Member K', 1234567800, 'member11@example.com')," +
-        "('member12', 'Member L', 1234567801, 'member12@example.com');";
+        "('user1', 'user1', 1234567801, 'user1@example.com');";
 
     public static final String INSERT_SAMPLE_DATA_RESERVATION =
         "INSERT INTO Reservation (payment_method, payment_status, payment_amount, member_id, payment_date) VALUES" +
-        "('Credit Card', true, 100, 'member1', '2023-01-01')," +
-        "('Debit Card', true, 200, 'member2', '2023-01-02')," +
-        "('Cash', false, 150, 'member3', '2023-01-03')," +
-        "('Credit Card', true, 120, 'member4', '2023-01-04')," +
-        "('Debit Card', true, 180, 'member5', '2023-01-05')," +
-        "('Cash', false, 130, 'member6', '2023-01-06')," +
-        "('Credit Card', true, 160, 'member7', '2023-01-07')," +
-        "('Debit Card', true, 170, 'member8', '2023-01-08')," +
-        "('Cash', false, 140, 'member9', '2023-01-09')," +
-        "('Credit Card', true, 190, 'member10', '2023-01-10')," +
-        "('Debit Card', true, 110, 'member11', '2023-01-11')," +
-        "('Cash', false, 120, 'member12', '2023-01-12');";
+        "('Credit Card', true, 100, 'user1', '2024-01-01')," +
+        "('Debit Card', true, 200, 'user1', '2024-01-02')," +
+        "('Cash', false, 150, 'user1', '2024-01-03')," +
+        "('Credit Card', true, 120, 'user1', '2024-01-04')," +
+        "('Debit Card', true, 180, 'user1', '2024-01-05')," +
+        "('Cash', false, 130, 'user1', '2024-01-06')," +
+        "('Credit Card', true, 160, 'user1', '2024-01-07')," +
+        "('Debit Card', true, 170, 'member8', '2024-01-08')," +
+        "('Cash', false, 140, 'member9', '2024-01-09')," +
+        "('Credit Card', true, 190, 'member10', '2024-01-10')," +
+        "('Debit Card', true, 110, 'member11', '2024-01-11')," +
+        "('Cash', false, 120, 'user1', '2024-01-12');";
 
     public static final String INSERT_SAMPLE_DATA_TICKET =
         "INSERT INTO Ticket (screening_schedule_id, theater_id, seat_id, reservation_id, is_ticketed, standard_price, sale_price) VALUES" +
