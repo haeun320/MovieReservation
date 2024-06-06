@@ -51,6 +51,7 @@ public class AdminMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Insert data menu item clicked");
+				handleInsertData();
 			}
 		});
 
@@ -104,6 +105,14 @@ public class AdminMenuBar extends JMenuBar {
 		AdminHomeView view = new AdminHomeView();
 		AdminHomeModel model = new AdminHomeModel(GetConnection());
 		AdminHomeController controller = new AdminHomeController(view, model);
+		view.setVisible(true);
+	}
+	
+	private void handleInsertData() {
+		parentFrame.dispose();
+		AdminInsertDataView view = new AdminInsertDataView();
+		AdminInsertDataModel model = new AdminInsertDataModel(GetConnection());
+		AdminInsertDataController controller = new AdminInsertDataController(view, model);
 		view.setVisible(true);
 	}
 }
