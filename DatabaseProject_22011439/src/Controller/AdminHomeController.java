@@ -31,5 +31,4 @@ public class AdminHomeController {
 			JOptionPane.showMessageDialog(view, "Fail to init database");
 		}
 	}
-	
 }
