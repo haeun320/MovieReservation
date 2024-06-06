@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
 import Utils.MemberMenuBar;
@@ -38,7 +39,7 @@ public class MemberSearchResultView extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void setResults(List<Map<String, String>> movieDetailsList) {
+    public void setResults(List<Map<String, String>> movieDetailsList, ActionListener reservationListener) {
         resultsPanel.removeAll();
         resultCountLabel.setText(movieDetailsList.size() + "개의 영화가 검색되었습니다.");
 
@@ -57,6 +58,9 @@ public class MemberSearchResultView extends JFrame {
             JButton detailButton = new JButton("상세보기");
             JButton reserveButton = new JButton("예매하기");
 
+            reserveButton.setActionCommand(String.valueOf(movieDetails.get("movie_id")));
+            reserveButton.addActionListener(reservationListener);
+            
             // Movie Info Panel
             gc.gridx = 0;
             gc.gridy = 0;

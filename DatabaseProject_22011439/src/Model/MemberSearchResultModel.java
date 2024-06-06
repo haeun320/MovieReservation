@@ -48,4 +48,8 @@ public class MemberSearchResultModel {
 
         return movieDetailsList;
     }
+    
+    public Connection getConnection() {
+    	return this.con;
+    }
 }
