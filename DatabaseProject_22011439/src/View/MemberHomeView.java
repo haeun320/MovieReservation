@@ -2,7 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionListener;
+
 import Utils.MemberMenuBar;
 
 public class MemberHomeView extends JFrame {
@@ -118,7 +119,7 @@ public class MemberHomeView extends JFrame {
         return genreField.getText();
     }
 
-    public void addSearchListener(java.awt.event.ActionListener listener) {
+    public void addSearchListener(ActionListener listener) {
         searchButton.addActionListener(listener);
     }
 }

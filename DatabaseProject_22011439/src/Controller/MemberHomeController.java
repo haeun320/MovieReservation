@@ -29,6 +29,11 @@ public class MemberHomeController {
         String directorName = view.getDirectorName();
         String actorName = view.getActorName();
         String genre = view.getGenre();
+        
+        if (movieName.isEmpty() && directorName.isEmpty() && actorName.isEmpty() && genre.isEmpty()) {
+            JOptionPane.showMessageDialog(view, "하나 이상의 조건을 입력하세요.");
+            return;
+        }
 
         List<String> movies = model.searchMovies(movieName, directorName, actorName, genre);
         if (!movies.isEmpty()) {
