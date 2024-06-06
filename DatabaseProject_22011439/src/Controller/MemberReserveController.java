@@ -30,6 +30,13 @@ public class MemberReserveController {
         }
 
         view.setSchedules(scheduleMap);
+        
+        view.addCancelButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleCancel();
+            }
+        });
 
         view.addSelectSeatListener(new ActionListener() {
             @Override
@@ -37,6 +44,15 @@ public class MemberReserveController {
                 handleSelectSeat();
             }
         });
+    }
+    
+    private void handleCancel() {
+    	// TODO
+    	MemberHomeView mView = new MemberHomeView();
+    	MemberHomeModel mModel = new MemberHomeModel(model.getConnection());
+    	MemberHomeController controller = new MemberHomeController(mView, mModel);
+    	view.dispose();
+    	mView.setVisible(true);
     }
 
     private void handleSelectSeat() {

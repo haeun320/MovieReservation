@@ -14,6 +14,7 @@ public class MemberSeatView extends JFrame {
     private MemberMenuBar menuBar;
     private JPanel seatPanel;
     private JButton[][] seatButtons;
+    private JButton backButton;
     private JButton proceedButton;
     private JLabel selectedSeatLabel;
     private ButtonGroup paymentMethodsGroup;
@@ -38,7 +39,8 @@ public class MemberSeatView extends JFrame {
                 seatPanel.add(seatButtons[row][col]);
             }
         }
-
+        
+        backButton = new JButton("뒤로가기");
         proceedButton = new JButton("결제하기");
         proceedButton.setEnabled(false);
         selectedSeatLabel = new JLabel("선택된 좌석: 없음");
@@ -59,10 +61,17 @@ public class MemberSeatView extends JFrame {
         paymentPanel.add(creditCardOption);
         paymentPanel.add(mobilePaymentOption);
         paymentPanel.add(bankTransferOption);
-
+        
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(selectedSeatLabel, BorderLayout.WEST);
-        bottomPanel.add(paymentPanel, BorderLayout.CENTER);
+        bottomPanel.add(backButton, BorderLayout.WEST);
+        
+        JPanel infoPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gc = new GridBagConstraints();
+        gc.gridx = 0;
+        infoPanel.add(selectedSeatLabel, gc);
+        infoPanel.add(paymentPanel, ++gc.gridx);
+        bottomPanel.add(infoPanel, BorderLayout.CENTER);
+        
         bottomPanel.add(proceedButton, BorderLayout.EAST);
 
         setLayout(new BorderLayout());
@@ -90,6 +99,10 @@ public class MemberSeatView extends JFrame {
                 seatButtons[row][col].addActionListener(listener);
             }
         }
+    }
+    
+    public void addBackButtonListener(ActionListener listener) {
+    	backButton.addActionListener(listener);
     }
 
     public void addProceedButtonListener(ActionListener listener) {

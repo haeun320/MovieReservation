@@ -25,6 +25,7 @@ public class MemberReserveView extends JFrame {
     private DefaultListModel<String> theaterListModel;
     private DefaultListModel<String> dateListModel;
     private DefaultListModel<String> timeListModel;
+    private JButton cancelButton;
     private JButton selectSeatButton;
     private Map<String, List<Map<String, String>>> schedules;
     private List<String> selectedSchedule;
@@ -52,7 +53,8 @@ public class MemberReserveView extends JFrame {
 
         dateList.setEnabled(false);
         timeList.setEnabled(false);
-
+        
+        cancelButton = new JButton("예매 취소");
         selectSeatButton = new JButton("좌석 선택");
         selectSeatButton.setEnabled(false);
 
@@ -102,7 +104,11 @@ public class MemberReserveView extends JFrame {
         gc.weightx = 1;
         gc.weighty = 1;
         panel.add(new JScrollPane(timeList), gc);
-
+        
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(cancelButton, BorderLayout.WEST);
+        bottomPanel.add(selectSeatButton, BorderLayout.EAST);
+        
         // Select seat button
         gc.gridx = 0;
         gc.gridy = 2;
@@ -110,7 +116,7 @@ public class MemberReserveView extends JFrame {
         gc.weightx = 0;
         gc.weighty = 0;
         gc.anchor = GridBagConstraints.CENTER;
-        panel.add(selectSeatButton, gc);
+        panel.add(bottomPanel, gc);
 
         add(panel);
 
@@ -199,6 +205,10 @@ public class MemberReserveView extends JFrame {
     
     public List<String> getSelectedSchedule() {
     	return selectedSchedule;
+    }
+    
+    public void addCancelButtonListener(ActionListener listener) {
+    	cancelButton.addActionListener(listener);
     }
 
     public void addSelectSeatListener(ActionListener listener) {

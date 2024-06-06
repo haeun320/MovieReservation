@@ -6,10 +6,42 @@ import java.util.*;
 public class MemberSeatModel {
     private Connection con;
     private int scheduleId;
+    private int movieId;
     
     public MemberSeatModel(Connection con, int scheduleId) {
         this.con = con;
         this.scheduleId = scheduleId;
+    }
+    
+    public int getMovieId() {
+    	int id = -1;
+    	PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String sql = "SELECT s.movie_id " +
+                         "FROM ScreeningSchedule s " +
+                         "WHERE s.screening_schedule_id = ?";
+            preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, scheduleId);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                id = resultSet.getInt("movie_id");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return id;
     }
     
     public int getTheaterId(int scheduleId) {
@@ -210,5 +242,9 @@ public class MemberSeatModel {
         }
 
         return isValid;
+    }
+    
+    public Connection getConnection() {
+    	return this.con;
     }
 }

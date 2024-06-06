@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.MemberSeatModel;
-import View.MemberSeatView;
+import Model.*;
+import View.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -61,6 +61,13 @@ public class MemberSeatController {
                 }
             }
         });
+        
+        view.addBackButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleBack();
+            }
+        });
 
         view.addProceedButtonListener(new ActionListener() {
             @Override
@@ -97,7 +104,19 @@ public class MemberSeatController {
     	
     	return info;
     }
-
+    
+    private void handleBack() {
+    	int movieId = model.getMovieId();
+    	
+    	MemberReserveView mView = new MemberReserveView();
+    	MemberReserveModel mModel = new MemberReserveModel(model.getConnection());
+    	MemberReserveController controller = new MemberReserveController(mView, mModel, movieId);
+    	
+    	
+    	view.dispose();
+    	mView.setVisible(true);
+    }
+    
     private void handleProceed() {
         if (selectedRow != -1 && selectedCol != -1) {
             String paymentMethod = view.getSelectedPaymentMethod();
