@@ -5,6 +5,7 @@ import View.*;
 import Model.*;
 import Controller.*;
 import java.awt.event.*;
+import java.sql.Connection;
 
 public class MemberMenuBar extends JMenuBar {
     private JMenu movieReservationMenu;
@@ -12,6 +13,15 @@ public class MemberMenuBar extends JMenuBar {
     private JMenu logoutMenu;
     private JFrame parentFrame;
     
+    private Connection con;
+	private MySQLConnector db;
+	
+	private Connection GetConnection() {
+		db = new MySQLConnector();
+		db.connectToDatabase("user1", "user1");
+		con = db.getConnection();
+		return con;
+	}
     public MemberMenuBar(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
@@ -20,6 +30,7 @@ public class MemberMenuBar extends JMenuBar {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Movie reservation clicked");
+                handleHome();
             }
         });
         add(movieReservationMenu);
@@ -50,5 +61,13 @@ public class MemberMenuBar extends JMenuBar {
     	LoginModel loginModel = new LoginModel();
     	LoginController loginController = new LoginController(loginModel, loginView);
     	loginView.setVisible(true);
+    }
+    
+    private void handleHome() {
+    	parentFrame.dispose();
+    	MemberHomeView view = new MemberHomeView();
+    	MemberHomeModel model = new MemberHomeModel(GetConnection());
+    	MemberHomeController controller = new MemberHomeController(view, model);
+    	view.setVisible(true);
     }
 }
