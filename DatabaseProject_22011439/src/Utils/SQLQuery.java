@@ -137,10 +137,10 @@ public class SQLQuery {
         "('Actor F', 6, 'Movie F')," +
         "('Actor G', 7, 'Movie G')," +
         "('Actor H', 8, 'Movie H')," +
-        "('Actor I', 9, 'Movie I')," +
-        "('Actor J', 10, 'Movie J')," +
-        "('Actor K', 11, 'Movie K')," +
-        "('Actor L', 12, 'Movie L');";
+        "('Actor A', 9, 'Movie I')," +
+        "('Actor A', 10, 'Movie J')," +
+        "('Actor A', 11, 'Movie K')," +
+        "('Actor A', 12, 'Movie L');";
 
     public static final String INSERT_SAMPLE_DATA_GENRE =
         "INSERT INTO Genre (genre_name, movie_id, movie_name) VALUES" +

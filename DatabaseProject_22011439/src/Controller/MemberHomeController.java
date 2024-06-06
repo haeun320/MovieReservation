@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.MemberHomeModel;
-import View.MemberHomeView;
+import Model.*;
+import View.*;
 
 import java.awt.event.*;
 import java.util.List;
@@ -15,7 +15,6 @@ public class MemberHomeController {
         this.view = view;
         this.model = model;
         
-        // Add action listener to the search button
         view.addSearchListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,10 +34,13 @@ public class MemberHomeController {
             return;
         }
 
-        List<String> movies = model.searchMovies(movieName, directorName, actorName, genre);
+        List<Integer> movies = model.searchMovies(movieName, directorName, actorName, genre);
         if (!movies.isEmpty()) {
-            String message = "Movies found: " + String.join(", ", movies);
-            JOptionPane.showMessageDialog(view, message);
+        	view.dispose();
+        	MemberSearchResultView Mview = new MemberSearchResultView();
+        	MemberSearchResultModel Mmodel = new MemberSearchResultModel(model.getConnection(), movies);
+        	MemberSearchResultController controller = new MemberSearchResultController(Mview, Mmodel);
+        	Mview.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(view, "No movies found");
         }

@@ -10,15 +10,15 @@ public class MemberHomeModel {
         this.con = con;
     }
 
-    public List<String> searchMovies(String movieName, String directorName, String actorName, String genre) {
-        List<String> movies = new ArrayList<>();
+    public List<Integer> searchMovies(String movieName, String directorName, String actorName, String genre) {
+        List<Integer> movieIds = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
             // Build the SQL query dynamically
             StringBuilder sql = new StringBuilder(
-                "SELECT DISTINCT m.movie_name FROM Movie m " +
+                "SELECT DISTINCT m.movie_id FROM Movie m " +
                 "LEFT JOIN Actor a ON m.movie_id = a.movie_id " +
                 "LEFT JOIN Genre g ON m.movie_id = g.movie_id WHERE 1=1"
             );
@@ -53,7 +53,7 @@ public class MemberHomeModel {
 
             // Process results
             while (resultSet.next()) {
-                movies.add(resultSet.getString("movie_name"));
+                movieIds.add(resultSet.getInt("movie_id"));
             }
 
         } catch (Exception e) {
@@ -67,6 +67,10 @@ public class MemberHomeModel {
             }
         }
 
-        return movies;
+        return movieIds;
+    }
+    
+    public Connection getConnection() {
+    	return this.con;
     }
 }
