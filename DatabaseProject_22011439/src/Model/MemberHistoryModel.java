@@ -78,4 +78,8 @@ public class MemberHistoryModel {
         }
         return isValid;
     }
+    
+    public Connection getConnection() {
+    	return this.con;
+    }
 }

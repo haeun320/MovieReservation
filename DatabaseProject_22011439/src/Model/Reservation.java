@@ -7,14 +7,48 @@ public class Reservation {
     private int reservationId;
     private String movieName;
     private Date screeningDate;
+    private String screeningDay;
     private Time screeningTime;
-    private String theaterName;
     private int screeningRound;
+    private String theaterName;
     private int seatNumber;
     private int price;
+    private String paymentMethod;
+    private Boolean paymentStatus;
+    private Date paymentDate;
 
-    // Getters and Setters
-
+    public Date getPaymentDate() {
+    	return paymentDate;
+    }
+    
+    public void setPaymentDate(Date paymentDate) {
+    	this.paymentDate = paymentDate;
+    }
+    
+    public Boolean getPaymentStatus() {
+    	return paymentStatus;
+    }
+    
+    public void setPaymentStatus(Boolean paymentStatus) {
+    	this.paymentStatus = paymentStatus;
+    }
+    
+    public String getPaymentMethod() {
+    	return paymentMethod;
+    }
+    
+    public void setPaymentMethod(String paymentMethod) {
+    	this.paymentMethod = paymentMethod;
+    }
+    
+    public String getScreeningDay() {
+    	return screeningDay;
+    }
+    
+    public void setScreeningDay(String screeningDay) {
+    	this.screeningDay = screeningDay;
+    }
+    
     public int getReservationId() {
         return reservationId;
     }

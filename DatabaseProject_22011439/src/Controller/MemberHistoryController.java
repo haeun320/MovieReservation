@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.MemberDetailModel;
 import Model.MemberHistoryModel;
 import Model.Reservation;
+import View.MemberDetailView;
 import View.MemberHistoryView;
 
 import javax.swing.*;
@@ -71,6 +73,12 @@ public class MemberHistoryController {
             							  "<br>상영관: " + reservation.getTheaterName() + "&nbsp;&nbsp;|&nbsp;&nbsp;좌석 번호: " + reservation.getSeatNumber() + "&nbsp;&nbsp;|&nbsp;&nbsp;판매 가격: " + reservation.getPrice() + "</html>");
             
             JButton detailButton = new JButton("상세보기");
+            detailButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    showReservationDetail(reservation.getReservationId());
+                }
+            });
             
             panel.add(checkBox, BorderLayout.WEST);
             reservationDetail.add(infoLabel, BorderLayout.WEST);
@@ -82,5 +90,12 @@ public class MemberHistoryController {
             panel.add(separator, BorderLayout.SOUTH);
             view.addReservationDetail(panel);
         }
+    }
+    
+    private void showReservationDetail(int reservationId) {
+        MemberDetailView detailView = new MemberDetailView();
+        MemberDetailModel detailModel = new MemberDetailModel(model.getConnection(), reservationId);
+        MemberDetailController detailController = new MemberDetailController(detailView, detailModel);
+        detailView.setVisible(true);
     }
 }
