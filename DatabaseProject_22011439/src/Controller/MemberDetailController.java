@@ -1,7 +1,8 @@
 package Controller;
 
 import Model.*;
-import View.MemberDetailView;
+import Utils.Constants;
+import View.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,12 +85,31 @@ public class MemberDetailController {
     }
 
     private void handleChangeMovieButton() {
-        // Implement change movie button logic here
+        // TODO: 예매 영화 변경 
         System.out.println("예매 영화 변경 버튼 클릭됨");
+        Constants constants = Constants.getInstance();
+        constants.setIsEdit(true);
+        constants.setReservationId(model.reservationId);
+        
+        MemberHomeView mView = new MemberHomeView();
+        MemberHomeModel mModel = new MemberHomeModel(model.getConnection());
+        MemberHomeController controller = new MemberHomeController(mView, mModel);
+        mView.setVisible(true);
+        view.dispose();
     }
 
     private void handleChangeScheduleButton() {
-        // Implement change schedule button logic here
+        // TODO: 예매 일정 변경  
         System.out.println("예매 일정 변경 버튼 클릭됨");
+        Constants constants = Constants.getInstance();
+        constants.setIsEdit(true);
+        constants.setReservationId(model.reservationId);
+        int movieId = model.getMovieId();
+        
+        MemberReserveView mView = new MemberReserveView();
+        MemberReserveModel mModel = new MemberReserveModel(model.getConnection());
+        MemberReserveController controller = new MemberReserveController(mView, mModel, movieId);
+        mView.setVisible(true);
+        view.dispose();
     }
 }

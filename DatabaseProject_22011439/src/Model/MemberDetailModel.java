@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class MemberDetailModel {
     private Reservation info;
-    private int reservationId;
+    public int reservationId;
     private Connection con;
     
     public MemberDetailModel(Connection con, int reservationId) {
@@ -97,5 +97,31 @@ public class MemberDetailModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public int getMovieId() {
+    	int movieId = -1;
+        String query = "select s.movie_id\n"
+        		+ "from Ticket t, ScreeningSchedule s\n"
+        		+ "where t.screening_schedule_id = s.screening_schedule_id and t.reservation_id = ?;";
+
+        try (
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            
+            stmt.setInt(1, reservationId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+            	movieId = rs.getInt("movie_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return movieId;
+    }
+    
+    public Connection getConnection() {
+    	return this.con;
     }
 }

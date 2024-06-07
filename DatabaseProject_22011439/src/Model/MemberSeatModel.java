@@ -243,6 +243,72 @@ public class MemberSeatModel {
 
         return isValid;
     }
+
+    
+    public boolean updateReserveInfo(List<Object> info, int reservationId) {
+        boolean isValid = false;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            con.setAutoCommit(false);
+
+            // Update Reservation
+            String sql = "UPDATE Reservation SET payment_method = ?, payment_status = ?, payment_amount = ?, member_id = ?, payment_date = ? WHERE reservation_id = ?";
+            preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setString(1, (String) info.get(0));
+            preparedStatement.setBoolean(2, (Boolean) info.get(1));
+            preparedStatement.setInt(3, (Integer) info.get(2));
+            preparedStatement.setString(4, (String) info.get(3));
+            preparedStatement.setDate(5, java.sql.Date.valueOf((String) info.get(4)));
+            preparedStatement.setInt(6, reservationId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Update Ticket
+                sql = "UPDATE Ticket SET screening_schedule_id = ?, theater_id = ?, seat_id = ?, is_ticketed = ?, standard_price = ?, sale_price = ? WHERE reservation_id = ?";
+                preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setInt(1, scheduleId);
+                preparedStatement.setInt(2, (Integer) info.get(5));
+                preparedStatement.setInt(3, (Integer) info.get(6));
+                preparedStatement.setBoolean(4, (Boolean) info.get(1)); // payment_status
+                preparedStatement.setInt(5, (int) ((Integer) info.get(2) * 1.1)); // standard_price 계산
+                preparedStatement.setInt(6, (Integer) info.get(2)); // sale_price
+                preparedStatement.setInt(7, reservationId);
+
+                rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    isValid = true;
+                }
+            }
+
+            con.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException rollbackException) {
+                rollbackException.printStackTrace();
+            }
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isValid;
+    }
     
     public Connection getConnection() {
     	return this.con;

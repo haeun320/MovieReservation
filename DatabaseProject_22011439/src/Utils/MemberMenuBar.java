@@ -11,17 +11,19 @@ public class MemberMenuBar extends JMenuBar {
     private JMenu movieReservationMenu;
     private JMenu reservationHistoryMenu;
     private JMenu logoutMenu;
+    private JMenu cancelChangeMenu;
     private JFrame parentFrame;
     
     private Connection con;
-	private MySQLConnector db;
-	
-	private Connection GetConnection() {
-		db = new MySQLConnector();
-		db.connectToDatabase("user1", "user1");
-		con = db.getConnection();
-		return con;
-	}
+    private MySQLConnector db;
+
+    private Connection getConnection() {
+        db = new MySQLConnector();
+        db.connectToDatabase("user1", "user1");
+        con = db.getConnection();
+        return con;
+    }
+
     public MemberMenuBar(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
@@ -54,29 +56,46 @@ public class MemberMenuBar extends JMenuBar {
             }
         });
         add(logoutMenu);
+
+        cancelChangeMenu = new JMenu("변경 취소");
+        cancelChangeMenu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Cancel Change clicked");
+                Constants.getInstance().setIsEdit(false);
+                updateCancelChangeMenu();
+            }
+        });
+        add(cancelChangeMenu);
+
+        updateCancelChangeMenu();
     }
-    
+
     private void handleLogout() {
-    	LoginView loginView = new LoginView();
-    	LoginModel loginModel = new LoginModel();
-    	LoginController loginController = new LoginController(loginModel, loginView);
-    	loginView.setVisible(true);
-    	parentFrame.dispose();
+        LoginView loginView = new LoginView();
+        LoginModel loginModel = new LoginModel();
+        LoginController loginController = new LoginController(loginModel, loginView);
+        loginView.setVisible(true);
+        parentFrame.dispose();
     }
-    
+
     private void handleHome() {
-    	MemberHomeView view = new MemberHomeView();
-    	MemberHomeModel model = new MemberHomeModel(GetConnection());
-    	MemberHomeController controller = new MemberHomeController(view, model);
-    	view.setVisible(true);
-    	parentFrame.dispose();
+        MemberHomeView view = new MemberHomeView();
+        MemberHomeModel model = new MemberHomeModel(getConnection());
+        MemberHomeController controller = new MemberHomeController(view, model);
+        view.setVisible(true);
+        parentFrame.dispose();
     }
-    
+
     private void handleHistory() {
-    	MemberHistoryView view = new MemberHistoryView();
-    	MemberHistoryModel model = new MemberHistoryModel(GetConnection());
-    	MemberHistoryController controoler = new MemberHistoryController(view, model);
-    	view.setVisible(true);
-    	parentFrame.dispose();
+        MemberHistoryView view = new MemberHistoryView();
+        MemberHistoryModel model = new MemberHistoryModel(getConnection());
+        MemberHistoryController controller = new MemberHistoryController(view, model);
+        view.setVisible(true);
+        parentFrame.dispose();
+    }
+
+    private void updateCancelChangeMenu() {
+        cancelChangeMenu.setVisible(Constants.getInstance().getIsEdit());
     }
 }
