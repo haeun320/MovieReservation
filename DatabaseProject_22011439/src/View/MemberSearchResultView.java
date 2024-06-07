@@ -39,7 +39,7 @@ public class MemberSearchResultView extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void setResults(List<Map<String, String>> movieDetailsList, ActionListener reservationListener) {
+    public void setResults(List<Map<String, String>> movieDetailsList, ActionListener reservationListener, ActionListener detailListener) {
         resultsPanel.removeAll();
         resultCountLabel.setText(movieDetailsList.size() + "개의 영화가 검색되었습니다.");
 
@@ -57,6 +57,9 @@ public class MemberSearchResultView extends JFrame {
             JLabel filmRatesLabel = new JLabel(movieDetails.get("film_rates"));
             JButton detailButton = new JButton("상세보기");
             JButton reserveButton = new JButton("예매하기");
+
+            detailButton.setActionCommand(String.valueOf(movieDetails.get("movie_id")));
+            detailButton.addActionListener(detailListener);
 
             reserveButton.setActionCommand(String.valueOf(movieDetails.get("movie_id")));
             reserveButton.addActionListener(reservationListener);

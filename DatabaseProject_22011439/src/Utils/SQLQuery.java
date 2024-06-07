@@ -132,6 +132,8 @@ public class SQLQuery {
     public static final String INSERT_SAMPLE_DATA_ACTOR =
         "INSERT INTO Actor (actor_name, movie_id, movie_name) VALUES" +
         "('Actor A', 1, 'Movie A')," +
+        "('Actor C', 1, 'Movie A')," +
+        "('Actor F', 1, 'Movie A')," +
         "('Actor B', 2, 'Movie B')," +
         "('Actor C', 3, 'Movie C')," +
         "('Actor D', 4, 'Movie D')," +

@@ -214,15 +214,4 @@ public class MemberReserveView extends JFrame {
     public void addSelectSeatListener(ActionListener listener) {
         selectSeatButton.addActionListener(listener);
     }
-    
-    public static void main(String[] args) {
-		MemberReserveView view = new MemberReserveView();
-		Connection con;
-		MySQLConnector db = new MySQLConnector();
-		db.connectToDatabase("user1", "user1");
-		con = db.getConnection();
-		MemberReserveModel model = new MemberReserveModel(con);
-		MemberReserveController controller = new MemberReserveController(view, model, 1);
-		view.setVisible(true);
-	}
 }

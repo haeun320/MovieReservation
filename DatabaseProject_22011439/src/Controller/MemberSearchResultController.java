@@ -22,6 +22,13 @@ public class MemberSearchResultController {
                 int movieId = Integer.parseInt(source.getActionCommand());
                 openReservationView(movieId);
             }
+        }, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton source = (JButton) e.getSource();
+                int movieId = Integer.parseInt(source.getActionCommand());
+                openDetailView(movieId);
+            }
         });
     }
 
@@ -31,5 +38,13 @@ public class MemberSearchResultController {
         new MemberReserveController(reserveView, reserveModel, movieId);
         reserveView.setVisible(true);
     	view.dispose();
+    }
+
+    private void openDetailView(int movieId) {
+        // Implement the logic to open the detailed view of the selected movie
+        MemberMovieView mView = new MemberMovieView();
+        MemberMovieModel mModel = new MemberMovieModel(model.getConnection(), movieId);
+        new MemberMovieController(mView, mModel);
+        mView.setVisible(true);
     }
 }
