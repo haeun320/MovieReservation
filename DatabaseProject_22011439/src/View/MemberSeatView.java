@@ -30,6 +30,11 @@ public class MemberSeatView extends JFrame {
         menuBar = new MemberMenuBar(this);
         setJMenuBar(menuBar);
         
+        // component
+        JLabel screen = new JLabel("SCREEN");
+        screen.setFont(new Font("Times", Font.BOLD, 20));
+        screen.setHorizontalAlignment(SwingConstants.CENTER);
+        
         seatPanel = new JPanel(new GridLayout(verticalSeats, horizontalSeats));
         seatButtons = new JButton[verticalSeats][horizontalSeats];
 
@@ -75,6 +80,7 @@ public class MemberSeatView extends JFrame {
         bottomPanel.add(proceedButton, BorderLayout.EAST);
 
         setLayout(new BorderLayout());
+        add(screen, BorderLayout.NORTH);
         add(seatPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
     }
