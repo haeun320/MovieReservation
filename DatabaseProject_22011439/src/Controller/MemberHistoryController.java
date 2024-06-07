@@ -95,7 +95,7 @@ public class MemberHistoryController {
     private void showReservationDetail(int reservationId) {
         MemberDetailView detailView = new MemberDetailView();
         MemberDetailModel detailModel = new MemberDetailModel(model.getConnection(), reservationId);
-        MemberDetailController detailController = new MemberDetailController(detailView, detailModel);
+        MemberDetailController detailController = new MemberDetailController(detailView, detailModel, view);
         detailView.setVisible(true);
     }
 }

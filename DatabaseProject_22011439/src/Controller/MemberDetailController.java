@@ -15,10 +15,12 @@ import java.util.Date;
 public class MemberDetailController {
     private MemberDetailView view;
     private MemberDetailModel model;
-
-    public MemberDetailController(MemberDetailView view, MemberDetailModel model) {
+    private MemberHistoryView hView;
+    
+    public MemberDetailController(MemberDetailView view, MemberDetailModel model, MemberHistoryView hView) {
         this.view = view;
         this.model = model;
+        this.hView = hView;
 
         // Initialize view with model data
         updateView();
@@ -96,6 +98,7 @@ public class MemberDetailController {
         MemberHomeController controller = new MemberHomeController(mView, mModel);
         mView.setVisible(true);
         view.dispose();
+        hView.dispose();
     }
 
     private void handleChangeScheduleButton() {
@@ -111,5 +114,6 @@ public class MemberDetailController {
         MemberReserveController controller = new MemberReserveController(mView, mModel, movieId);
         mView.setVisible(true);
         view.dispose();
+        hView.dispose();
     }
 }
