@@ -15,14 +15,33 @@ public class MemberDetailModel {
     
     private Reservation fetchReservationInfo() {
         Reservation reservation = null;
-        String query = "SELECT r.reservation_id, m.movie_name, ss.screening_start_date, ss.screening_day, ss.screening_start_time, " +
-                       "ss.screening_round, t.theater_name, s.seat_num, r.payment_amount, r.payment_method, r.payment_status, r.payment_date " +
-                       "FROM Reservation r " +
-                       "JOIN ScreeningSchedule ss ON r.reservation_id = ss.screening_schedule_id " +
-                       "JOIN Movie m ON ss.movie_id = m.movie_id " +
-                       "JOIN Theater t ON ss.theater_id = t.theater_id " +
-                       "JOIN Seat s ON ss.theater_id = s.theater_id " +
-                       "WHERE r.reservation_id = ?";
+        String query = "SELECT \n"
+        		+ "    r.reservation_id,\n"
+        		+ "    m.movie_name,\n"
+        		+ "    ss.screening_start_date,\n"
+        		+ "    ss.screening_day,\n"
+        		+ "    ss.screening_start_time,\n"
+        		+ "    ss.screening_round,\n"
+        		+ "    t.theater_name,\n"
+        		+ "    s.seat_num,\n"
+        		+ "    r.payment_amount,\n"
+        		+ "    r.payment_method,\n"
+        		+ "    r.payment_status,\n"
+        		+ "    r.payment_date\n"
+        		+ "FROM \n"
+        		+ "    Reservation r\n"
+        		+ "JOIN \n"
+        		+ "    Ticket tk ON r.reservation_id = tk.reservation_id\n"
+        		+ "JOIN \n"
+        		+ "    ScreeningSchedule ss ON tk.screening_schedule_id = ss.screening_schedule_id\n"
+        		+ "JOIN \n"
+        		+ "    Movie m ON ss.movie_id = m.movie_id\n"
+        		+ "JOIN \n"
+        		+ "    Theater t ON ss.theater_id = t.theater_id\n"
+        		+ "JOIN \n"
+        		+ "    Seat s ON tk.seat_id = s.seat_id\n"
+        		+ "WHERE \n"
+        		+ "    r.reservation_id = ?;";
 
         try (
              PreparedStatement stmt = con.prepareStatement(query)) {

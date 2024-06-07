@@ -6,14 +6,14 @@ public class SQLQuery {
     public static final String CREATE_MOVIE_TABLE = 
         "CREATE TABLE Movie (" +
         "movie_id int AUTO_INCREMENT not null, " +
-        "movie_name varchar(30), " +
+        "movie_name varchar(30) not null, " +
         "running_time int, " +
         "film_rates varchar(30), " +
         "director_name varchar(30), " +
         "movie_info varchar(1000), " +
-        "release_date date, " +
+        "release_date date not null, " +
         "grade float, " +
-        "screening_count INT, " +
+        "screening_count INT not null, " +
         "primary key(movie_id), " +
         "CHECK (film_rates IN ('전체관람가', '12세 이상 관람가', '15세 이상 관람가', '청소년 관람 불가'))," +
         "CHECK (screening_count >= 1 AND screening_count <= 4)" +
@@ -22,7 +22,7 @@ public class SQLQuery {
     public static final String CREATE_ACTOR_TABLE = 
         "CREATE TABLE Actor (" +
         "actor_id int AUTO_INCREMENT not null, " +
-        "actor_name varchar(30), " +
+        "actor_name varchar(30) not null, " +
         "movie_id int, " +
         "movie_name varchar(30), " +
         "primary key(actor_id), " +
@@ -32,7 +32,7 @@ public class SQLQuery {
     public static final String CREATE_GENRE_TABLE = 
         "CREATE TABLE Genre (" +
         "genre_id int AUTO_INCREMENT not null, " +
-        "genre_name varchar(30), " +
+        "genre_name varchar(30) not null, " +
         "movie_id int, " +
         "movie_name varchar(30), " +
         "primary key(genre_id), " +
@@ -44,8 +44,8 @@ public class SQLQuery {
         "theater_id int AUTO_INCREMENT not null, " +
         "theater_name VARCHAR(30), " +
         "number_of_seats INT, " +
-        "horizontal_seats INT, " +
-        "vertical_seats INT, " +
+        "horizontal_seats INT not null, " +
+        "vertical_seats INT not null, " +
         "is_in_use BOOLEAN, " +
         "primary key(theater_id)" +
         ");";
@@ -53,8 +53,8 @@ public class SQLQuery {
     public static final String CREATE_SCREENING_SCHEDULE_TABLE = 
         "CREATE TABLE ScreeningSchedule (" +
         "screening_schedule_id INT AUTO_INCREMENT not null, " +
-        "movie_id INT, " +
-        "theater_id INT, " +
+        "movie_id INT not null, " +
+        "theater_id INT not null, " +
         "screening_start_date DATE, " +
         "screening_day VARCHAR(5), " +
         "screening_round INT, " +
@@ -86,11 +86,11 @@ public class SQLQuery {
     public static final String CREATE_RESERVATION_TABLE = 
         "CREATE TABLE Reservation (" +
         "reservation_id int AUTO_INCREMENT not null, " +
-        "payment_method varchar(50), " +
-        "payment_status boolean, " +
+        "payment_method varchar(30), " +
+        "payment_status boolean default false, " +
         "payment_amount int, " +
-        "member_id varchar(30), " +
-        "payment_date date, " +
+        "member_id varchar(30) not null, " +
+        "payment_date date default NULL, " +
         "primary key(reservation_id), " +
         "foreign key(member_id) references Member(member_id)" +
         ");";
@@ -98,11 +98,11 @@ public class SQLQuery {
     public static final String CREATE_TICKET_TABLE = 
         "CREATE TABLE Ticket (" +
         "ticket_id int AUTO_INCREMENT not null, " +
-        "screening_schedule_id int, " +
-        "theater_id int, " +
-        "seat_id int, " +
-        "reservation_id int, " +
-        "is_ticketed boolean, " +
+        "screening_schedule_id int not null, " +
+        "theater_id int not null, " +
+        "seat_id int not null, " +
+        "reservation_id int not null, " +
+        "is_ticketed boolean default false, " +
         "standard_price int, " +
         "sale_price int, " +
         "primary key(ticket_id), " +

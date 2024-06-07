@@ -13,7 +13,7 @@ public class MemberHistoryModel {
 
     public List<Reservation> getReservationHistory(String userId) {
         List<Reservation> reservations = new ArrayList<>();
-        String sql = "SELECT r.reservation_id, m.movie_name, ss.screening_start_date, ss.screening_start_time, th.theater_name, ss.screening_round, s.seat_num, ti.standard_price " +
+        String sql = "SELECT r.reservation_id, m.movie_name, ss.screening_start_date, ss.screening_start_time, th.theater_name, ss.screening_round, s.seat_num, ti.sale_price " +
                 "FROM Reservation r " +
                 "JOIN Ticket ti ON r.reservation_id = ti.reservation_id " +
                 "JOIN ScreeningSchedule ss ON ti.screening_schedule_id = ss.screening_schedule_id " +
@@ -35,7 +35,7 @@ public class MemberHistoryModel {
                 reservation.setTheaterName(rs.getString("theater_name"));
                 reservation.setScreeningRound(rs.getInt("screening_round"));
                 reservation.setSeatNumber(rs.getInt("seat_num"));
-                reservation.setPrice(rs.getInt("standard_price"));
+                reservation.setPrice(rs.getInt("sale_price"));
 
                 reservations.add(reservation);
             }
