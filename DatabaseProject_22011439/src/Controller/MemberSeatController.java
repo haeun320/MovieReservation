@@ -124,10 +124,26 @@ public class MemberSeatController {
                 System.out.println("좌석: Row " + (selectedRow + 1) + ", Col " + (selectedCol + 1));
                 System.out.println("결제 수단: " + paymentMethod);
                 System.out.println("seat_id: " + getSelectedSeatId());
-                // TODO: 티켓, 예매 정보 저장 
+
                 boolean isValid = model.insertReserveInfo(reserveInfo());
                 if (isValid) {
-                    JOptionPane.showMessageDialog(view, "예매 성공");
+                	int result = JOptionPane.showConfirmDialog(view, "예매 성공\n예매 내역을 조회하시겠습니까?", "Confirmation", JOptionPane.OK_CANCEL_OPTION);
+                    if (result == JOptionPane.OK_OPTION) {
+                        System.out.println("User confirmed the reservation.");
+                        MemberHistoryView mView = new MemberHistoryView();
+                        MemberHistoryModel mModel = new MemberHistoryModel(model.getConnection());
+                        MemberHistoryController controller = new MemberHistoryController(mView, mModel);
+                        mView.setVisible(true);
+                        view.dispose();
+                    } else {
+                        // User clicked Cancel
+                        System.out.println("User cancelled the reservation.");
+                        MemberHomeView mView = new MemberHomeView();
+                        MemberHomeModel mModel = new MemberHomeModel(model.getConnection());
+                        MemberHomeController controller = new MemberHomeController(mView, mModel);
+                        mView.setVisible(true);
+                        view.dispose();
+                    }                
                 }
                 else {
                     JOptionPane.showMessageDialog(view, "예매 실패");
