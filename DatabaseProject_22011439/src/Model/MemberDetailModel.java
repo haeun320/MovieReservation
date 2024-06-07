@@ -3,17 +3,17 @@ package Model;
 import java.sql.*;
 
 public class MemberDetailModel {
-	private Reservation info;
-	private int reservationId;
-	private Connection con;
-	
-	public MemberDetailModel(Connection con, int reservationId) {
-		this.con = con;
-		this.reservationId = reservationId;
-		this.info = fetchReservationInfo();
-	}
-	
-	private Reservation fetchReservationInfo() {
+    private Reservation info;
+    private int reservationId;
+    private Connection con;
+    
+    public MemberDetailModel(Connection con, int reservationId) {
+        this.con = con;
+        this.reservationId = reservationId;
+        this.info = fetchReservationInfo();
+    }
+    
+    private Reservation fetchReservationInfo() {
         Reservation reservation = null;
         String query = "SELECT r.reservation_id, m.movie_name, ss.screening_start_date, ss.screening_day, ss.screening_start_time, " +
                        "ss.screening_round, t.theater_name, s.seat_num, r.payment_amount, r.payment_method, r.payment_status, r.payment_date " +
@@ -51,8 +51,32 @@ public class MemberDetailModel {
 
         return reservation;
     }
-	
-	public Reservation getInfo() {
+    
+    public Reservation getInfo() {
         return info;
+    }
+
+    public void updatePaymentStatus(boolean paymentStatus, String paymentDate) {
+        String updateQuery = "UPDATE Reservation SET payment_status = ?, payment_date = ? WHERE reservation_id = ?";
+        String ticketUpdateQuery = "UPDATE Ticket SET is_ticketed = ? WHERE reservation_id = ?";
+
+        try (
+             PreparedStatement stmt = con.prepareStatement(updateQuery);
+             PreparedStatement ticketStmt = con.prepareStatement(ticketUpdateQuery)) {
+            
+            stmt.setBoolean(1, paymentStatus);
+            stmt.setDate(2, Date.valueOf(paymentDate));
+            stmt.setInt(3, reservationId);
+            stmt.executeUpdate();
+            
+            ticketStmt.setBoolean(1, true);
+            ticketStmt.setInt(2, reservationId);
+            ticketStmt.executeUpdate();
+            
+            // Refresh the reservation info
+            this.info = fetchReservationInfo();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -5,7 +5,11 @@ import View.MemberDetailView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MemberDetailController {
     private MemberDetailView view;
@@ -60,12 +64,23 @@ public class MemberDetailController {
         details[9] = reservation.getPaymentStatus() ? "완료" : "미완료";
         details[10] = reservation.getPaymentDate() != null ? dateFormat.format(reservation.getPaymentDate()) : "N/A";
         
-        view.setReservationDetails(details);
+        view.setReservationDetails(details, reservation.getPaymentStatus());
     }
 
     private void handlePayButton() {
         // Implement pay button logic here
         System.out.println("결제하기 버튼 클릭됨");
+        
+        if (processPayment()) {
+            model.updatePaymentStatus(true, "2024-06-01");
+            updateView();
+        }
+    }
+
+    private boolean processPayment() {
+        // Simulate payment processing
+        // In a real-world scenario, integrate with a payment gateway here
+        return true;
     }
 
     private void handleChangeMovieButton() {

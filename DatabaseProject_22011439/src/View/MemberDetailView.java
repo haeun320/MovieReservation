@@ -41,7 +41,7 @@ public class MemberDetailView extends JFrame {
         add(buttonPanel);
     }
 
-    public void setReservationDetails(String[] details) {
+    public void setReservationDetails(String[] details, boolean paymentStatus) {
         String[] labelsText = {
             "영화명: ", "상영일: ", "상영 요일: ", "상영 시간: ", "상영 회차: ", "상영관: ", 
             "좌석 번호: ", "가격: ", "결제 방법: ", "결제 상태: ", "결제 날짜: "
@@ -50,6 +50,9 @@ public class MemberDetailView extends JFrame {
         for (int i = 0; i < labels.length; i++) {
             labels[i].setText(labelsText[i] + details[i]);
         }
+        
+        // Enable or disable the pay button based on payment status
+        payButton.setEnabled(!paymentStatus);
     }
 
     public void addPayButtonListener(ActionListener listener) {
