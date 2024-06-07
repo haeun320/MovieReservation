@@ -40,6 +40,7 @@ public class MemberMenuBar extends JMenuBar {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Reservation history clicked");
+                handleHistory();
             }
         });
         add(reservationHistoryMenu);
@@ -68,6 +69,14 @@ public class MemberMenuBar extends JMenuBar {
     	MemberHomeView view = new MemberHomeView();
     	MemberHomeModel model = new MemberHomeModel(GetConnection());
     	MemberHomeController controller = new MemberHomeController(view, model);
+    	view.setVisible(true);
+    }
+    
+    private void handleHistory() {
+    	parentFrame.dispose();
+    	MemberHistoryView view = new MemberHistoryView();
+    	MemberHistoryModel model = new MemberHistoryModel(GetConnection());
+    	MemberHistoryController controoler = new MemberHistoryController(view, model);
     	view.setVisible(true);
     }
 }
