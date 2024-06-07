@@ -35,8 +35,8 @@ public class AdminInsertDataView extends JFrame {
 
         tableModel = new DefaultTableModel();
         dataTable = new JTable(tableModel);
-        dataTable.setGridColor(Color.BLACK); // Set grid color
-        dataTable.setShowGrid(true); // Enable grid lines
+        dataTable.setGridColor(Color.BLACK); 
+        dataTable.setShowGrid(true); 
         JScrollPane scrollPane = new JScrollPane(dataTable);
 
         addRowButton = new JButton("+ 새 행 삽입");

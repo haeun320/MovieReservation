@@ -52,6 +52,13 @@ public class AdminInsertDataController {
                 onSave();
             }
         });
+        
+        view.getCancelButton().addActionListener(new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e) {
+                initView();
+            }
+        });
     }
 
     private void updateTableData(String tableName) {

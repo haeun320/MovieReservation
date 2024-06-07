@@ -44,6 +44,14 @@ public class AdminAlterDataController {
                 executeQuery(query);
             }
         });
+        
+        view.getCancelButton().addActionListener(new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: 취소 버튼 구현
+        		view.getQueryTextArea().setText("");
+            }
+        });
     }
 
     private void updateColumnInfo(String tableName) {
