@@ -26,10 +26,10 @@ public class MemberSearchResultController {
     }
 
     private void openReservationView(int movieId) {
-    	view.dispose();
         MemberReserveView reserveView = new MemberReserveView();
         MemberReserveModel reserveModel = new MemberReserveModel(model.getConnection());
         new MemberReserveController(reserveView, reserveModel, movieId);
         reserveView.setVisible(true);
+    	view.dispose();
     }
 }

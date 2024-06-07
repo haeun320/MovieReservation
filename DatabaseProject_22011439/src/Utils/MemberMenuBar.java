@@ -57,26 +57,26 @@ public class MemberMenuBar extends JMenuBar {
     }
     
     private void handleLogout() {
-    	parentFrame.dispose();
     	LoginView loginView = new LoginView();
     	LoginModel loginModel = new LoginModel();
     	LoginController loginController = new LoginController(loginModel, loginView);
     	loginView.setVisible(true);
+    	parentFrame.dispose();
     }
     
     private void handleHome() {
-    	parentFrame.dispose();
     	MemberHomeView view = new MemberHomeView();
     	MemberHomeModel model = new MemberHomeModel(GetConnection());
     	MemberHomeController controller = new MemberHomeController(view, model);
     	view.setVisible(true);
+    	parentFrame.dispose();
     }
     
     private void handleHistory() {
-    	parentFrame.dispose();
     	MemberHistoryView view = new MemberHistoryView();
     	MemberHistoryModel model = new MemberHistoryModel(GetConnection());
     	MemberHistoryController controoler = new MemberHistoryController(view, model);
     	view.setVisible(true);
+    	parentFrame.dispose();
     }
 }

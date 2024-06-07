@@ -47,12 +47,11 @@ public class MemberReserveController {
     }
     
     private void handleCancel() {
-    	// TODO
     	MemberHomeView mView = new MemberHomeView();
     	MemberHomeModel mModel = new MemberHomeModel(model.getConnection());
     	MemberHomeController controller = new MemberHomeController(mView, mModel);
-    	view.dispose();
     	mView.setVisible(true);
+    	view.dispose();
     }
 
     private void handleSelectSeat() {

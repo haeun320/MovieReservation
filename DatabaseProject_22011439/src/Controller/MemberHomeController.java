@@ -36,11 +36,11 @@ public class MemberHomeController {
 
         List<Integer> movies = model.searchMovies(movieName, directorName, actorName, genre);
         if (!movies.isEmpty()) {
-        	view.dispose();
         	MemberSearchResultView Mview = new MemberSearchResultView();
         	MemberSearchResultModel Mmodel = new MemberSearchResultModel(model.getConnection(), movies);
         	MemberSearchResultController controller = new MemberSearchResultController(Mview, Mmodel);
         	Mview.setVisible(true);
+        	view.dispose();
         } else {
             JOptionPane.showMessageDialog(view, "No movies found");
         }

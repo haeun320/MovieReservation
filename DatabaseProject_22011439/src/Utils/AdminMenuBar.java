@@ -86,42 +86,42 @@ public class AdminMenuBar extends JMenuBar {
 	}
 
 	private void handleLogout() {
-		parentFrame.dispose();
 		LoginView loginView = new LoginView();
 		LoginModel loginModel = new LoginModel();
 		LoginController loginController = new LoginController(loginModel, loginView);
 		loginView.setVisible(true);
+		parentFrame.dispose();
 	}
 
 	private void handleGetTable() {
-		parentFrame.dispose();
 		AdminGetTableView view = new AdminGetTableView();
 		AdminGetTableModel model = new AdminGetTableModel(GetConnection());
 		AdminGetTableController controller = new AdminGetTableController(view, model);
 		view.setVisible(true);
+		parentFrame.dispose();
 	}
 	
 	private void handleHome() {
-		parentFrame.dispose();
 		AdminHomeView view = new AdminHomeView();
 		AdminHomeModel model = new AdminHomeModel(GetConnection());
 		AdminHomeController controller = new AdminHomeController(view, model);
 		view.setVisible(true);
+		parentFrame.dispose();
 	}
 	
 	private void handleInsertData() {
-		parentFrame.dispose();
 		AdminInsertDataView view = new AdminInsertDataView();
 		AdminInsertDataModel model = new AdminInsertDataModel(GetConnection());
 		AdminInsertDataController controller = new AdminInsertDataController(view, model);
 		view.setVisible(true);
+		parentFrame.dispose();
 	}
 	
 	private void handleAlterData() {
-		parentFrame.dispose();
 		AdminAlterDataView view = new AdminAlterDataView();
 		AdminAlterDataModel model = new AdminAlterDataModel(GetConnection());
 		AdminAlterDataController controller = new AdminAlterDataController(view, model);
 		view.setVisible(true);
+		parentFrame.dispose();
 	}
 }
